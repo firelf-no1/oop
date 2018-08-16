@@ -1,0 +1,38 @@
+=============================
+=      File description     =
+=============================
+Competition.java - represents a Nim competition between two players, consisting of a given number of rounds.
+ It also keeps track of the number of victories of each player.
+
+Board.java - represents a board of the Nim game. The board can be of a variable size.
+ A board object is disposable, meaning that the moves performed on the board are not reversible, and if a
+ "clean" board is required, the user has to initialize a new board object.
+
+Move.java - represents a move in the Nim game by a player.
+ A move consists of the row on which it is applied, the left bound (inclusive) of the sequence of sticks to
+ mark, and the right bound (inclusive) of the same sequence.
+
+Player.java - represents a player in the Nim game, producing Moves as a response to a Board state.
+ Each player is initialized with a type, either human or one of several computer strategies, which defines
+ the move he produces when given a board in some state. The heuristic strategy of the player is already
+ implemented. You are required to implement the rest of the player types according to the exercise
+ description.
+
+=============================
+=          Design           =
+=============================
+noting spacial
+
+
+
+=============================
+=  Implementation details   =
+=============================
+The smart player's  will increase his chances of winning, since he needs the second player to mark the last
+stick, and leaving an odd number of sticks strive for that position. Also, if he gets to the point where
+there is an odd number of sticks so that there is at most one stick in each row (after his turn), he will
+win with certainty.
+
+=============================
+=    Answers to questions   =
+=============================
