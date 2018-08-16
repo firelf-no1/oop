@@ -1,0 +1,56 @@
+
+=============================
+=      File description     =
+=============================
+AvlTree.java - the main class that implements an AVl tree.
+Avlnode.java - class that implements an avl node.
+README - this file.
+
+=============================
+=          Design           =
+=============================
+The avl tree is complex data structure that involve a lot of updating throw
+each action in the tree.
+because of that it is most importent to keep the code sample and readable as it can be,
+by splitting each task to smaller basciks task, in this way we keep the code modular.
+moreover, in order to encapsulating our code the inner implantision of the treee actions
+was keept as private, according to minimal api principal.
+for example we define the rotation as preavet and separate them to each specific task,
+rr, rl, lr, ll rotation.
+finally we want to add, that that we implement an avl node class that each node in the
+tree is instance of, this was most intuitiv to us, because the node is separate objet 
+than the tree, that under some condition is an avl tree.
+
+=============================
+=  Implementation details   =
+=============================
+
+add and delete workflow is as follow: checking if the specific element is in the tree,
+using the contains function, for delete if he isn't we return false, if he is indeed
+present in the tree, we return true, and for add we return true if he already contained
+in the tree, and false otherwize.
+now we want to act the needed action on it, without damaging the avl tree criteria and 
+bst cartiara. so after act on the treee we using the function  to balnce the tree.
+in it's turn this function find the relvant rotation and do it.
+in the delting step we was using a helper methoeds according the number of children the 
+relvant node has.
+
+=============================
+=    Answers to questions   =
+=============================
+
+5.1) 1. The needed order of insert the elemnts is: 
+5, 4, 3, 2, 1, 6, 7, 8, 9, 10, 11, 12
+
+5.2) 1. The asymptotic running time is O(N*log(N))
+     2. In the best posibel case we don't need to fix the avl condtion but 
+	stil adding an elment cost log(N) and chking the avl crtiria is cost
+	addtion N action, so totaly we get Nlog(N) as optimal runing time.
+
+5.3) 1. The asymptotic running time is O(N*log(N))
+     2. according to 5.2)2 the best case cost O(N*log(N))
+	
+5.4) 1.  The asymptotic running time is O(1)
+     2.  This is the minmal complexity time it can be, so it is the best possiblty.
+
+
