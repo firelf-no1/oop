@@ -1,0 +1,41 @@
+=============================
+=      File description     =
+=============================
+AddonGameGUI.java - Extension to the GameGUI , allows me to change the ships image.
+AddonPhysics.java - Extension to the physics , allows interaction with the location of the 
+ 		 physics object and with the angle.
+AggressiveShip.java - contain the Aggressive ship class
+BasherShip.java - contain the basher ship class
+ComputerShip.java - contain the computer ship class thats controls all of the ships the computer
+		 control
+DrunkardShip.java - contain the Drunkard ship class
+HumanShip.java - contain the human ship class 
+RunnerShip.java - contain the runner ship class
+SpaceShip.java - contain the space ship class that is incarge of the API of all the ships
+SpaceShipFactory - contain the Space Ship Factory class thats creates the ship that are
+		requierd by the command line input
+SpecialShip -  contain the Special ship class
+
+
+=============================
+=          Design           =
+=============================
+sorry i relly dont know what to write here my design was simple and not very special.
+exept for the ship image and the special ship.
+
+
+=============================
+=  Implementation details   =
+=============================
+drunkard ship - i designed the ship to escape and fire away from any nerby ship.
+special ship - i designed the special ship to escape from any nearby ship and if a ship
+gets to a distance of 0.15 units from the ship, the ship will fire in 6 diraction and 
+telaport from the location.
+
+I add a special class of physics to make the special ship fireing possible
+
+
+
+=============================
+=    Answers to questions   =
+=============================
