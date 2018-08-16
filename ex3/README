@@ -1,0 +1,41 @@
+
+=============================
+File description     
+=============================
+
+SimpleSet- Interface, help compare between CollectionFacadeSet and SimpleHashSet
+
+CollectionFacadeSet- facade for collections of string acting like set.
+
+SimpleHashSet- abstract class for hash sets.
+
+OpenHashSet- hash set implementation through quadratic probing.
+
+ClosedHashSet- A hash-set based on closed-hashing with quadratic probing. 
+Extends SimpleHashSet.
+SimpleSetPerformanceAnalyzer- check five Sets and compare times on various elements.
+
+
+=============================
+Design           
+=============================
+
+openHashSet wa implemented by Defining a wrapper-class that has-a LinkedList<String> and delegates
+methods to it,
+and have an array of that class instead.
+
+Deleting i started with chacking if its a ligle cell and if it containd the valve after 
+that i changed it to
+ ""
+The number of iterations in my warm-up phase is 100000.
+
+
+=============================
+Implementation details   
+=============================
+
+
+=============================
+ Answers to questions
+=============================
+
