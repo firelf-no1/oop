@@ -1,0 +1,183 @@
+=============================
+=      File description     =
+=============================
+
+***Package main***
+    Sjavac.java
+***Package regex***
+    Regex.java
+***Package parser***
+    Parser.java
+***Package methods***
+    Line.java
+    Method.java
+***Package scope***
+    Scope.java
+        InnerBractVar.java
+        MethodCallScope.java
+        MethodLineScope.java
+        ReturnScope.java
+        VariableScope.java
+    StipulationScope.java
+        IfScope.java
+        WhileScope.java
+***Package variable***
+    VariablesFactory.java
+    Variables.java
+        Variable.java
+            CharVariable.java
+            StringVariable.java
+            IntVar.java
+                IntVariable.java
+                DoubleVar.java
+                    DoubleVariable.java
+                    BooleanVariable.java
+***Package ex6Exception***
+    Ex6Exception.java
+    Messages.java
+
+=============================
+=          Design           =
+=============================
+
+If we summaries our design, it can be divided in to 6 packages:
+
+ main package - contains the main method, which used to runs the parser, and print the suitable output
+ according to the compiler results. Our code uses exceptions when it detects any violation in the file.
+ if the File is a non s-java file (Prints 2), and if the file is a s-java file, but the code is not
+ in a s-java legal format (prints 1).
+ Otherwise no violations were found, therefore the code is valid (prints 0)
+
+ parser package - Contains Parser.java class which is responsible for scanning the code line by line,
+ create suitable objects (scopes, variables, methods) and check if the code is a legal s-java format.
+ if not, throws detailed exceptions.
+
+ method package - Used to describe method object which is an extension of Variables class.
+
+ scope package - Uses for describing all the different scopes objects in exercise.
+ Each scope object contains data members describing inner methods and variables, and variables in the
+ same scope as the method. The Scope objects are used to describe the scope of: outer scope,
+ if scope, while scope, method line scope, method call scope, and all variables scopes.
+
+ variable package - Contains the Variable factory which is used by the variable or method scope.
+ In order to meet the demand that double types can contains int values, and boolean contains double and
+ int values we decided to create two of those classes as an abstract for this specific cases,
+ DoubleVar extends IntVar and BooleanVariable extends DoubleVar.
+
+ ex6Exception package - Contains Ex6Exception which extends Exception,
+ this object is thrown with a detailed message when our compiler finds the code has any violation.
+ We will elaborate on the exceptions below.
+
+=============================
+=  Implementation details   =
+=============================
+
+We have tried to implement Facade, Single choice and polymorphism principles.
+We chose to elaborate on following:
+
+1 At variable package we chose to implement the following structure.
+  super class - IntVar, sub class - DoubleVar, IntVariable
+  super class - DoubleVar, sub classes - DoubleVariable, BooleanVariable
+  This structure allows any input of int or double to be assigned to boolean parameter, since
+  boolean is sub class of double which sub class of int. Same goes for assigning int to double.
+
+2 Our scope implementation were meant to keep each scope for itself, therefore
+  creating a modular and very easy to add new scope structures.
+
+3 We decided to store all the exception messages in a container in Messages.java. Thus if we'll
+  want in the future to add one more exception term, we just need to add suitable message,
+  and call Ex6Exception with the message (under the wanted condition)
+
+
+=============================
+=    Answers to questions   =
+=============================
+
+6.1 Error handling - We catch all the exceptions in the main file, thus we use the exceptions
+    to stop the operation and also notify us about specific error. We have two types of exceptions:
+        1. IOException - Will be thrown if no s-java file found.
+        2. Ex6Exception -  Will be thrown if the file found to have illegal s-java code format.
+    after catching both exceptions a specific error will be printed to system.err,
+    describing the cause for the exception.
+
+6.2.1 - Try to divide your program into small, independent units.
+
+  * Sjavac.java -  The main class which receives address of s-java doc, and runs the compiler
+    via parser class. print 0,1, or 2 according the analyzer findings (as detailed in the design).
+
+  * Parser.java - The class is Used for scanning the code line by line, create suitable objects (methods,
+    scopes, variables) and check if it's a valid code.
+
+  * Line.java - Object represent a line in the s-java code
+
+  * Methods.java - This class is used to describe a method object
+
+  * Scope.java - This class is used to represent all scopes (as detailed above in the design). Each
+  Scope object contains 3 data members: innerVars - variables inside scope, outerVars - variables
+  in same scope as the scope object. innerMethods - inner methods inside the scope.
+
+  * Variable.java - This class is used to represent all variables of the types: int, double, boolean,
+  char, String.
+
+  * VariableFactory - This class is used to create new suitable Variable object.
+
+  * Regex.java - This class is used to store all the regex.
+
+  * Messages.java - This class is used to store all the exception messages.
+
+  * Ex6Exception.java - This class is used as an exception object thrown with a detailed messaged when
+  a violation detected (as detailed above).
+
+6.2.2 - Try to think of several design alternatives for each unit, consider the pros and cons of each
+        alternative, and select the one you think is best.
+
+        1. Using several exceptions classes instead of 1 - We could have created for every type of
+           exception a different class which contains it's message and a name point on the cause for exception.
+           The pro for that it will be easier to understand the cause for exception (by user)
+           only by looking at his name, maybe even better implementation of Single Choice Principal.
+           The downside for that implementation is that if we will create an exception for every case, there will
+           be a lot of exceptions it will be harder and more confusing, harder to read and understand, and when
+           we would want to create new exception we'll need to create a new class (instead in or implementation
+           only add a message and a call for that message).
+
+       2. Variable - We chose to create IntVar class as the super class, it's sub classes are IntVariable,
+          DoubleVar. DoubleVar is the super class of DoubleVariable and BooleanVariable. This design uses
+          polymorphism principles and makes sure every boolean is a type of double, therefore boolean
+          will be able to receive int or double input, also double will be able to receive int input.
+          We had another choice to make terms in each one of the classes, the pro for this option is less
+          complicated code to read, but our design makes the code more modular and easier to update and change.
+
+
+6.2.3 - How would you modify your code to add new types of variables (e.g., float)?
+
+        We will add suitable regex to patterns, create a new class of the new type in variables package
+        (this class will extends Variable) and add in the VariableFactory a case for the new type.
+
+6.2.4 - Below are four features your program currently does not support. Please select two of
+        them, and describe which modifications/extensions you would have to make in your code
+        in order to support them. Please briefly describe which classes you would add to your code,
+        which methods you would add to existing classes, and which classes you would modify. You
+        are not required to implement these features.
+
+        We chose classes and different method's
+
+        1. Classes - We would add new class scope, a new pattern and use it in one of the
+        conditions in parser.
+
+        2. Different methods' types - First we would add suitable new message in messages container
+        We would set data member in methodLineScope return type = expected, and if the returned value
+        is different than return type we will throw exception (in line analyzer method in methodLineScope).
+
+6.3 - please describe two of the main regular expressions you used in your code.
+
+        1. TYPE_RETURN = "^\\s*return+\\s*(.*)\\s*;\\s*$" - This regex is used to detect return.
+        Can start with spaces in any form zero time or more, than return must show up, afterwards
+        can be spaces and any characters, and than ";" must show up, afterwards can be only be spaces.
+
+        2.  ILLEGAL_LINE = "^[ ]+\\S+$" - Used to detect line starts with space and not empty line (illegal).
+        Have to begin with space at least once, than any character which is not space at least once,
+        therefore it's not an empty line and starts with space --> it's illegal line.
+
+
+
+
