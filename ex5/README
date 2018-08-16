@@ -1,0 +1,73 @@
+
+
+=============================
+=      File description     =
+=============================
+files:
+filesprocessing package:
+    exceptions package:
+        TypeOneErrors - exception according to the described in the exercise.
+        TypeTwoErrors - exception according to the described in the exercise.
+
+    filters package:
+        FilterInterface - Interface of the filters. all the following classes are implementations of this
+                          interface all as described in the exercise.
+        AllFilter - all files are matched
+        BetweenFilter - filters all the files that their size is between the two given numbers
+        ContainsFilter - receives a string and checks if the file's name contains it.
+        ExecutableFilter - checks if the file has a executable permission for the current user
+        FilterFactory - factory for the filters according to the factory design.
+        GraterThanFilter - filters all the files that their size is not greater than the number given as an argument.
+        HiddenFilter - checks if the file is hidden
+        NameFilter - checks if the value equals the file name
+        NotFilter - checks if not has been applied.
+        PrefixFilter - checks if thr value is the prefix of the file name
+        SmallerThenFilter - checks if the size of the file is smaller than a given argument.
+        SuffixFilter - checks if the value is the suffix of the file name
+        WritableFilter - checks if a file is writable
+        YesOrNoFilter - checks if the val is yes or no
+
+    Orders package:
+        OrderInterface - order interface. all the following are orders according to the described in the
+                         exercise.
+        AbsOrder - orders the files names alphabetically.
+        OrderFactory - Order factory according to the factory design.
+        ReverseOrder - receives the order which was given and arranges it in reverse.
+        SizeOrder - orders the files according to their size.
+        TypeOrder - orders the files type alphabetically
+
+    DirectoryProcessor class - The processor that processes the given directory and command file
+    ParsingFactory - initiates the print of the messages and manages the interaction with the user according
+                     to the given arguments.
+    SectionFactory - analyzes the command file and divides the commands into sections of one filter and one
+                     order as described in the assignment.
+
+=============================
+=          Design           =
+=============================
+First, notice that every class is in its relevant package. Because there are a lot of different classes of
+filters and orders it is convenient to organize them all in a relevant package thus obtaining readability, and
+overall well planed, organized code.
+Secondly, since all the filters implement the same "filtercheck" method,
+we chose to do an interface, and let all the filters be implementations of the filterInterface. Same for the
+orders types.
+Third, we did one class for each filter, order, and exception to increase modularity, and readability. Notice
+that each one of those classes is really short code. Notice that the code is very easy to change. If we want
+to add extra filter, or order we will not need to alter an already working code, and it will be simple to
+manipulate it. The only thing that is changing is the factory class. That is convenient both to the coder and
+the user.
+Our main goal was to divide the big problem into little problems therefore the many classes that do only
+a few things at a time.
+Also, we built a class for each exception that extends the Exception. That way it is callable and printable
+as we run the program. You can see that in the Parsing the type two error is shutting down the program
+immediately.
+
+=============================
+=  Implementation details   =
+=============================
+As previously explained, the implementation was with the use of interface using the comparator and the array
+In the Order classes the implementation was using the comparator and implemented a private compare method.
+That way it was easy to sort the files when they are organized in array. We chose to use the java.util.Arrays
+to sort the array and receive the corrected array with minimal code. We will point out that the comparator is
+implemented differently in each order type.
+
